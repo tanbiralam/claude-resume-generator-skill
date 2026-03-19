@@ -10,7 +10,7 @@ Built for job seekers who apply to multiple roles and need each application prop
 
 1. Extracts all text and hyperlinks from your uploaded PDF or DOCX (including hidden embedded URLs)
 2. Analyzes the job description and classifies the role type (AI/ML, Backend, Frontend, Full-stack, Mobile)
-3. Rewrites every bullet in XYZ format: *Accomplished X by doing Y, resulting in Z*
+3. Rewrites every bullet in XYZ format: _Accomplished X by doing Y, resulting in Z_
 4. Tailors framing, section ordering, and skills to match the role type
 5. Runs a 12-item quality gate (banned words, verb discipline, metric verification, AI fingerprint check)
 6. Compiles a clean one-page PDF and returns both the PDF and raw LaTeX source
@@ -36,6 +36,7 @@ Upload your resume PDF or DOCX, paste the job description in the same message, a
 ```
 
 Claude will ask you two questions before generating:
+
 - **CGPA** — if not found in your resume, it'll ask once. Say no to skip.
 - **Missing project links** — if a project has no GitHub or live URL in the PDF, it'll ask. Say no to omit.
 
@@ -51,24 +52,29 @@ Claude will ask you two questions before generating:
 ## What makes it different
 
 ### Role-type classification
+
 Before writing a word, the skill classifies the JD into one of five role types and frames the entire resume around it:
 
-| Role type | What it does |
-|---|---|
-| AI / ML Engineer | AI projects lead, RAG/LLM/vector language throughout, AI & ML skills row first |
-| Backend / Infra | Architecture bullets lead, async/reliability/scale framing |
-| Frontend | UI bullets lead, component systems, user-experience metrics |
-| Full-stack / Startup | Breadth bullets lead, ownership language, shipped-to-production signals |
-| Mobile | Mobile projects lead, platform-specific metrics |
+| Role type            | What it does                                                                   |
+| -------------------- | ------------------------------------------------------------------------------ |
+| AI / ML Engineer     | AI projects lead, RAG/LLM/vector language throughout, AI & ML skills row first |
+| Backend / Infra      | Architecture bullets lead, async/reliability/scale framing                     |
+| Frontend             | UI bullets lead, component systems, user-experience metrics                    |
+| Full-stack / Startup | Breadth bullets lead, ownership language, shipped-to-production signals        |
+| Mobile               | Mobile projects lead, platform-specific metrics                                |
 
 ### Anti-fabrication rules
+
 The skill checks verb ownership against your source resume before rewriting. It will never upgrade "contributed to" into "led" or "architected" without evidence. It will never invent a metric not present in your original.
 
 ### AI fingerprint avoidance
+
 A dedicated quality rules file bans 30+ known AI writing patterns (delve, leverage, spearhead, seamlessly...), enforces past-tense active verbs, limits em dashes to zero, and checks that fewer than 40% of bullets start with -ing verbs.
 
 ### 12-item quality gate
+
 Every generated resume is checked before compilation:
+
 - No banned words
 - No invented metrics
 - No verb overclaiming
@@ -97,6 +103,7 @@ resume-generator/
 Uses the [Jake Gutierrez resume template](https://github.com/jakegut/resume) (MIT license) — the most widely used single-page resume template for software engineers.
 
 To compile the raw LaTeX output locally:
+
 ```bash
 pdflatex resume_output.tex
 ```
@@ -122,10 +129,3 @@ Or paste into [Overleaf](https://overleaf.com) — no local install needed.
 - CGPA matters for early-career roles in India — add it when prompted if you have a strong one (above 8.0).
 
 ---
-
-## License
-
-MIT — free to use, modify, and share.
-
-Built with the [Jake Gutierrez resume template](https://github.com/jakegut/resume) (MIT).
-Inspired by [claude-resume-kit](https://github.com/ARPeeketi/claude-resume-kit) by ARPeeketi — particularly the anti-fabrication rules, AI fingerprint avoidance, and role-type framing concepts.
